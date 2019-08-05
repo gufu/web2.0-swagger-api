@@ -1,11 +1,11 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "This is a simple API",
+    "description" : "Website 2.0 API",
     "version" : "1.0.0",
-    "title" : "Simple Inventory API",
+    "title" : "Website 2.0 API",
     "contact" : {
-      "email" : "you@your-company.com"
+      "email" : "k.gusz@cinema-city.pl"
     },
     "license" : {
       "name" : "Apache 2.0",
@@ -13,6 +13,9 @@
     }
   },
   "tags" : [ {
+    "name" : "cinemas",
+    "description" : "Provides cinema information"
+  }, {
     "name" : "admins",
     "description" : "Secured Admin-only calls!!"
   }, {
@@ -20,6 +23,32 @@
     "description" : "Operations available to regular developers"
   } ],
   "paths" : {
+    "/cinemas" : {
+      "get" : {
+        "tags" : [ "cinemas" ],
+        "summary" : "returns all cinemas information",
+        "description" : "By passing in the appropriate options you can search for available cinema in the system\n",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "searchString",
+          "description" : "pass an optional search string for looking up inventory",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/InventoryItem"
+              }
+            }
+          }
+        }
+      }
+    },
     "/inventory" : {
       "get" : {
         "tags" : [ "developers" ],
